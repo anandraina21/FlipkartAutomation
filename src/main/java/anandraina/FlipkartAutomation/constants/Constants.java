@@ -1,21 +1,28 @@
-package anandraina.FlipkartAutomation.elementfactory;
+package anandraina.FlipkartAutomation.constants;
 
-public class ElementFactory {
+public class Constants {
 
-	private ElementFactory() {
+	private Constants() {
 	}
 
-	public static ElementFactory effile = new ElementFactory();
+	public static final class ElementFactory {
+		public static final String EMAIL_TEXTFIELD = "._2zrpKA._1dBPDZ";
+		public static final String PASSWORD_PASSWORDFIELD = "//input[@type=\"password\"]";
+		public static final String LOGIN_BUTTON = "._2AkmmA._1LctnI._7UHT_c";
+		public static final String SEARCHBOX_TEXTFIELD = "//input[@name=\"q\"]";
+		public static final String PRODUCT_LISTITEM = "//li[@class=\"_1va75j\"]";
+		public static final String PRODUCTNAME_LINKTEXT = "._3wU53n";
+		public static final String ADDTOCART_BUTTON = "._2AkmmA._2Npkh4._2MWPVK";
+		public static final String REMOVE_LINKTEXT = "//div[.='Remove']";
+		public static final String REMOVE_BUTTON = ".gdUKd9._3Z4XMp._2nQDKB";
+		public static final String PROFILESECTION_DROPDOWN = ".dHGf8H";
+		public static final String LOGOUT_LISTITEM = "//div[.='Logout']";
+	}
 
-	public final String email_textfield = "._2zrpKA._1dBPDZ";
-	public final String password_passwordfield = "//input[@type=\"password\"]";
-	public final String login_button = "._2AkmmA._1LctnI._7UHT_c";
-	public final String searchbox_textfield = "//input[@name=\"q\"]";
-	public final String product_listitem = "//li[@class=\"_1va75j\"]";
-	public final String productname_linktext = "._3wU53n";
-	public final String addtocart_button = "._2AkmmA._2Npkh4._2MWPVK";
-	public final String remove_linktext = "//div[.='Remove']";
-	public final String remove_button = ".gdUKd9._3Z4XMp._2nQDKB";
-	public final String profilesection_dropdown = ".dHGf8H";
-	public final String logout_listitem = "//div[.='Logout']";
+	public static final class Resources {
+		public static final String URL = "https://www.flipkart.com/";
+		public static final String EMAIL = "sample text";
+		public static final String PASSWORD = "sample text";
+		public static final String PRODUCT_NAME = "IPhone 7";
+	}
 }
