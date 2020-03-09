@@ -1,0 +1,5 @@
+target/
+target/test-classes/
+.classpath
+.settings/
+Screenshots/*
