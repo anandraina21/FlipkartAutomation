@@ -20,9 +20,11 @@ public class Constants {
 	}
 
 	public static final class Resources {
-		public static final String URL = "https://www.flipkart.com/";
+		// *****Change email and password before commit*****
 		public static final String EMAIL = "sample text";
 		public static final String PASSWORD = "sample text";
+		
+		public static final String URL = "https://www.flipkart.com/";
 		public static final String PRODUCT_NAME = "IPhone 7";
 	}
 }
