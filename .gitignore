@@ -1,1 +1,4 @@
 Screenshots/
+target/
+target/test-classes
+test-output/
