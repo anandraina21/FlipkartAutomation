@@ -18,22 +18,23 @@ import anandraina.FlipkartAutomation.constants.Constants;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
-public class OrderLifeCycle_StepDefinition {
+public class OrderLifeCycleStepDefinition {
 	WebDriver chromedriver;
 	WebDriverWait wait;
 
 	@Given("^User opens the website$")
-	public void User_opens_the_website() {
+	public void userOpensTheWebsite() {
 		System.setProperty("webdriver.chrome.driver", "./BrowserDrivers/chromedriver.exe");
 		chromedriver = new ChromeDriver();
 		chromedriver.manage().window().maximize();
 		chromedriver.get(Constants.Resources.URL);
-		wait = new WebDriverWait(chromedriver, 20);
+		wait = new WebDriverWait(chromedriver, 30);
 	}
 
 	@When("^User logs in to their account$")
-	public void User_logs_in_to_their_account() throws InterruptedException {
+	public void userLogsInToTheirAccount() throws InterruptedException {
 		WebElement email = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.EMAIL_TEXTFIELD)));
 		email.sendKeys(Constants.Resources.EMAIL);
@@ -43,11 +44,11 @@ public class OrderLifeCycle_StepDefinition {
 		WebElement login = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.LOGIN_BUTTON)));
 		login.click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 	}
 
 	@Then("^User searches for product$")
-	public void User_searches_for_product() throws InterruptedException {
+	public void userSearchesForProduct() throws InterruptedException {
 		WebElement searchbox = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(Constants.ElementFactory.SEARCHBOX_TEXTFIELD)));
 		searchbox.sendKeys(Constants.Resources.PRODUCT_NAME);
@@ -57,7 +58,7 @@ public class OrderLifeCycle_StepDefinition {
 	}
 
 	@Then("^Add an item to cart$")
-	public void Add_an_item_to_cart() throws InterruptedException {
+	public void addAnItemToCart() throws InterruptedException {
 		WebElement productName = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.PRODUCTNAME_LINKTEXT)));
 		productName.click();
@@ -75,8 +76,14 @@ public class OrderLifeCycle_StepDefinition {
 	}
 
 	@Then("^Take screenshot of product in cart$")
-	public void Take_screenshot_of_product_in_cart() throws IOException, InterruptedException {
-		Thread.sleep(2000);
+	public void takeScreenshotOfProductInCart() throws IOException, InterruptedException {
+		Boolean waitForText = wait.until(ExpectedConditions
+				.textToBePresentInElementLocated(By.cssSelector(Constants.ElementFactory.MYCART_ID), "My Cart"));
+		/*
+		 * Use following import statement to avoid deprecated method : "import
+		 * org.junit.Assert;"
+		 */
+		Assert.assertEquals(true, waitForText);
 		TakesScreenshot screenshot = ((TakesScreenshot) chromedriver);
 		File screenshot_file = screenshot.getScreenshotAs(OutputType.FILE);
 		File destination = new File("./Screenshots/screenshot.jpg");
@@ -84,7 +91,7 @@ public class OrderLifeCycle_StepDefinition {
 	}
 
 	@Then("^Remove the item from cart$")
-	public void Remove_the_item_from_cart() throws InterruptedException {
+	public void removeTheItemFromCart() throws InterruptedException {
 		WebElement removeLinkText = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(Constants.ElementFactory.REMOVE_LINKTEXT)));
 		removeLinkText.click();
@@ -94,7 +101,8 @@ public class OrderLifeCycle_StepDefinition {
 	}
 
 	@Then("^Logout from the account$")
-	public void Logout_from_the_account() throws InterruptedException {
+	public void logoutFromTheAccount() throws InterruptedException {
+		Thread.sleep(1000);
 		WebElement profileDropdown = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.PROFILESECTION_DROPDOWN)));
 		Actions actions = new Actions(chromedriver);
@@ -105,7 +113,7 @@ public class OrderLifeCycle_StepDefinition {
 	}
 
 	@Then("^Close the browser$")
-	public void Close_the_browser() throws InterruptedException {
+	public void closeTheBrowser() throws InterruptedException {
 		Thread.sleep(5000);
 		chromedriver.quit();
 	}
