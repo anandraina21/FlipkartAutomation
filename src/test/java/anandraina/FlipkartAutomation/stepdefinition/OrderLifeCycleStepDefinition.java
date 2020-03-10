@@ -44,11 +44,11 @@ public class OrderLifeCycleStepDefinition {
 		WebElement login = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.LOGIN_BUTTON)));
 		login.click();
-		Thread.sleep(1000);
 	}
 
 	@Then("^User searches for product$")
 	public void userSearchesForProduct() throws InterruptedException {
+		Thread.sleep(1000);
 		WebElement searchbox = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(Constants.ElementFactory.SEARCHBOX_TEXTFIELD)));
 		searchbox.sendKeys(Constants.Resources.PRODUCT_NAME);
@@ -80,9 +80,10 @@ public class OrderLifeCycleStepDefinition {
 		Boolean waitForText = wait.until(ExpectedConditions
 				.textToBePresentInElementLocated(By.cssSelector(Constants.ElementFactory.MYCART_ID), "My Cart"));
 		/*
-		 * Use following import statement to avoid deprecated method : "import
-		 * org.junit.Assert;"
+		 * Use following import statement to avoid deprecated method :
+		 * "import org.junit.Assert;"
 		 */
+		// Assert used here to check whether page contents have been loaded
 		Assert.assertEquals(true, waitForText);
 		TakesScreenshot screenshot = ((TakesScreenshot) chromedriver);
 		File screenshot_file = screenshot.getScreenshotAs(OutputType.FILE);
