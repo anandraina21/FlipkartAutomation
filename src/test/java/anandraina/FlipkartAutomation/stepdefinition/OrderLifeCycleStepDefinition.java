@@ -23,7 +23,19 @@ import org.junit.Assert;
 public class OrderLifeCycleStepDefinition {
 	WebDriver chromedriver;
 	WebDriverWait wait;
-
+	WebElement email;
+	WebElement passwd;
+	WebElement login;
+	WebElement searchbox;
+	WebElement productList;
+	WebElement productName;
+	WebElement addToCart;
+	WebElement removeLinkText;
+	WebElement removeButton;
+	WebElement profileDropdown;
+	WebElement logout;
+	Boolean waitForText;
+	
 	@Given("^User opens the website$")
 	public void userOpensTheWebsite() {
 		System.setProperty("webdriver.chrome.driver", "./BrowserDrivers/chromedriver.exe");
@@ -35,13 +47,13 @@ public class OrderLifeCycleStepDefinition {
 
 	@When("^User logs in to their account$")
 	public void userLogsInToTheirAccount() throws InterruptedException {
-		WebElement email = wait.until(ExpectedConditions
+		email = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.EMAIL_TEXTFIELD)));
 		email.sendKeys(Constants.Resources.EMAIL);
-		WebElement passwd = wait.until(ExpectedConditions
+		passwd = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath(Constants.ElementFactory.PASSWORD_PASSWORDFIELD)));
 		passwd.sendKeys(Constants.Resources.PASSWORD);
-		WebElement login = wait.until(
+		login = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.LOGIN_BUTTON)));
 		login.click();
 	}
@@ -49,17 +61,17 @@ public class OrderLifeCycleStepDefinition {
 	@Then("^User searches for product$")
 	public void userSearchesForProduct() throws InterruptedException {
 		Thread.sleep(1000);
-		WebElement searchbox = wait.until(
+		searchbox = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(Constants.ElementFactory.SEARCHBOX_TEXTFIELD)));
 		searchbox.sendKeys(Constants.Resources.PRODUCT_NAME);
-		WebElement productList = wait.until(
+		productList = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(Constants.ElementFactory.PRODUCT_LISTITEM)));
 		productList.click();
 	}
 
 	@Then("^Add an item to cart$")
 	public void addAnItemToCart() throws InterruptedException {
-		WebElement productName = wait.until(ExpectedConditions
+		productName = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.PRODUCTNAME_LINKTEXT)));
 		productName.click();
 		Thread.sleep(1000);
@@ -70,14 +82,14 @@ public class OrderLifeCycleStepDefinition {
 				chromedriver.switchTo().window(handle);
 			}
 		}
-		WebElement addToCart = wait.until(ExpectedConditions
+		addToCart = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.ADDTOCART_BUTTON)));
 		addToCart.click();
 	}
 
 	@Then("^Take screenshot of product in cart$")
 	public void takeScreenshotOfProductInCart() throws IOException, InterruptedException {
-		Boolean waitForText = wait.until(ExpectedConditions
+		waitForText = wait.until(ExpectedConditions
 				.textToBePresentInElementLocated(By.cssSelector(Constants.ElementFactory.MYCART_ID), "My Cart"));
 		/*
 		 * Use following import statement to avoid deprecated method :
@@ -93,10 +105,10 @@ public class OrderLifeCycleStepDefinition {
 
 	@Then("^Remove the item from cart$")
 	public void removeTheItemFromCart() throws InterruptedException {
-		WebElement removeLinkText = wait.until(
+		removeLinkText = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(Constants.ElementFactory.REMOVE_LINKTEXT)));
 		removeLinkText.click();
-		WebElement removeButton = wait.until(
+		removeButton = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.REMOVE_BUTTON)));
 		removeButton.click();
 	}
@@ -104,11 +116,11 @@ public class OrderLifeCycleStepDefinition {
 	@Then("^Logout from the account$")
 	public void logoutFromTheAccount() throws InterruptedException {
 		Thread.sleep(1000);
-		WebElement profileDropdown = wait.until(ExpectedConditions
+		profileDropdown = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.cssSelector(Constants.ElementFactory.PROFILESECTION_DROPDOWN)));
 		Actions actions = new Actions(chromedriver);
 		actions.moveToElement(profileDropdown).perform();
-		WebElement logout = wait.until(
+		logout = wait.until(
 				ExpectedConditions.visibilityOfElementLocated(By.xpath(Constants.ElementFactory.LOGOUT_LISTITEM)));
 		actions.click(logout).perform();
 	}
